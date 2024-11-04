@@ -75,8 +75,110 @@ int getLastClientId(FILE *fich) {
     fclose(fich);
     return lastId;
 }
+void quitter(){
+                system("cls");
+            gotoxy(32,5);
+            printf("--------------------------------------------");
+            for(int i =0 ;i<5 ;i++){   
+                printf("|");
+            }
+            printf("--------------------------------------------");
+            
+            gotoxy(67,10);
+            printf("Merci pour votre Visite ..... ");
+            gotoxy(32,15);
+            printf("--------------------------------------------");
+            for(int i =0 ;i<5 ;i++){   
+                printf("|");
+            }
+            printf("--------------------------------------------");          
+}
+void erreur(){
+       system("cls");
+            gotoxy(32,5);
+            printf("--------------------------------------------");
+            for(int i =0 ;i<5 ;i++){   
+                printf("|");
+            }
+            printf("--------------------------------------------");
+            
+            gotoxy(67,10);
+            printf("erreur de saisir  :\n");
+            gotoxy(32,15);
+            printf("--------------------------------------------");
+            for(int i =0 ;i<5 ;i++){   
+                printf("|");
+            }
+            printf("--------------------------------------------");       
+    
+}
+void afficher_menu() {
+    int choix=0;
+    int x = 30;
+    int y = 2;  
+    client c;
+    FILE* fich;
+    date d;
+    system("cls");
+ do
+    {
+    gotoxy(x,y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ MAIN MENU ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n");
 
+    gotoxy(x, y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 1-CREATION DE COMPTE .\n");
+
+    gotoxy(x, y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 2-AFFICHAGE DE COMPTE .\n");
+
+    gotoxy(x, y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 3-FAIRE UNE TRANSACTION .\n");
+
+    gotoxy(x, y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 4-SUPPRIMER LE COMPTE .\n");
+
+    gotoxy(x, y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 5-CREATION DE COMPTE .\n");
+
+    gotoxy(x, y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 6-QUITTER L'APPLICATION.\n");
+
+    gotoxy(x, y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n");
+    gotoxy(x,y++);
+    printf("donner votre choix : ");
+    scanf("%d",&choix);
+        switch (choix)
+        {
+        case 1:
+            system("cls");
+            CREATIONDECOMPTE(fich,c);
+            break;
+        case 2:
+            system("cls");
+            AFFICHAGEDECOMPTE(fich,c);
+            break;
+        case 3:
+         
+            break;
+        case 4:
+           
+            break;
+        case 5:
+            
+            break;
+        case 6:
+            quitter();
+            break;
+        default:
+            erreur();
+            break;
+        }
+    } while (choix != 6);
+    
+}
 int CREATIONDECOMPTE(FILE* fich, client c1) {
+  
     char choix = 'N';
     int lastId = getLastClientId(fich);
     c1.idclient = lastId + 1;
@@ -155,70 +257,49 @@ int CREATIONDECOMPTE(FILE* fich, client c1) {
         printf("TU PEUX SAUVEGARDER VOTRE INFORMATIONS O/N : \n");
         scanf(" %c", &choix);
         while (getchar() != '\n'); 
-    } while (choix == 'N');
+    } while (choix == 'N' || choix =='n');
 
     gotoxy(x, y++);
     printf("TU peux donner le mot de passe (4 chiffres) : ");
     scanf("%d", &c1.password);
     while (getchar() != '\n'); 
 
-    clear_screen();
+    system("cls");
     gotoxy(x, y++);
     printf("Ton compte a ete enregistre avec succes. ");
     ecrituredansfichier(fich, c1);
 
     return 0;
 }
-void quitter(){
-                system("cls");
-            gotoxy(32,5);
-            printf("--------------------------------------------");
-            for(int i =0 ;i<5 ;i++){   
-                printf("|");
-            }
-            printf("--------------------------------------------");
-            
-            gotoxy(67,10);
-            printf("Merci pour votre Visite ..... ");
-            gotoxy(32,15);
-            printf("--------------------------------------------");
-            for(int i =0 ;i<5 ;i++){   
-                printf("|");
-            }
-            printf("--------------------------------------------");
-
-           
-}
-void afficher_menu() {
-    int choix=0;
+int AFFICHAGEDECOMPTE(FILE* fich, client c1){
+     int choix=0;
     int x = 30;
     int y = 2;  
-    client c;
-    FILE* fich;
+  
     date d;
-    system("cls");
+    
  do
     {
     gotoxy(x,y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ MAIN MENU ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ AFFICHAGE DE COMPTE  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 1-CREATION DE COMPTE .\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 1-AFFICHER  VOTRE INFORMATIONS PERSONNELES .\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 2-AFFICHAGE DE COMPTE .\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 2-AFFICHER VOTRE SOLDE .\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 3-FAIRE UNE TRANSACTION .\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 3-AFFICHER VOTRE HISTORIQUES.\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 4-SUPPRIMER LE COMPTE .\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 4-MODIFIER VOTRE INFORMATIONS .\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 5-CREATION DE COMPTE .\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 5-CHANGER VOTRE MOT DE PASS  .\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 6-QUITTER L'APPLICATION.\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 6-RETURNER AU MENU PRINCIPALE.\n");
 
     gotoxy(x, y++);
     printf("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n");
@@ -230,8 +311,8 @@ void afficher_menu() {
         switch (choix)
         {
         case 1:
-            system("cls");
-            CREATIONDECOMPTE(fich,c);
+           
+            
             break;
         case 2:
            
@@ -246,17 +327,15 @@ void afficher_menu() {
             
             break;
         case 6:
-            quitter();
-
+            afficher_menu();
             break;
         default:
-            printf("erreur de saisir  :\n");
+            erreur();
             break;
         }
     } while (choix != 6);
     
 }
-
 int main() {
     setlocale(LC_ALL, "fr_FR.UTF-8");  
     SetConsoleOutputCP(65001);
