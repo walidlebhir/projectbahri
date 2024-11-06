@@ -157,10 +157,12 @@ void afficher_menu() {
         {
         case 1:
             system("cls");
-            CREATIONDECOMPTE(fich,idlcient);
+            loadingPage();
+            CREATIONDECOMPTE(fich);
             break;
         case 2:
             system("cls");
+            loadingPage();
             AFFICHAGEDECOMPTE(fich,idclient);
             break;
         case 3:
@@ -176,20 +178,26 @@ void afficher_menu() {
           
             break;
         case 7:
+        clear_screen();
+        loadingPage();
             quitter();
             break;
         default:
+        clear_screen();
+        loadingPage();
             erreur();
             break;
         }
     } while (choix != 6);
     
 }
-int CREATIONDECOMPTE(FILE* fich, client c1) {
-  
+int CREATIONDECOMPTE(FILE* fich) {
+    system("Cls");
+    client c1;
     char choix = 'N';
     int lastId = getLastClientId(fich);
     c1.idclient = lastId + 1;
+    
 
     int lastIdhis = 1;
     fich = fopen("client.txt", "r");
@@ -281,6 +289,8 @@ int CREATIONDECOMPTE(FILE* fich, client c1) {
 }
 int AFFICHAGEDECOMPTE(FILE* fich, int clientid){
      int choix=0;
+     system("Cls");
+
     int x = 30;
     int y = 2;  
   
@@ -315,7 +325,7 @@ int AFFICHAGEDECOMPTE(FILE* fich, int clientid){
   
     printf("donner votre choix : ");
     scanf("\t%d",&choix);
-    printf("%d %d",x,y);
+    
         switch (choix)
         {
         case 1:
@@ -348,7 +358,90 @@ int main() {
     setlocale(LC_ALL, "fr_FR.UTF-8");  
     SetConsoleOutputCP(65001);
     system("COLOR 0A");
+    loadingPage();
     afficher_menu();
     
     return 0;
+}
+void box(int x, int y, int X, int Y){
+
+  int i,j;
+  system("color 0A");
+
+  for(i = 1; i <= y; i++){
+	  
+	  gotoxy(X, Y++);
+	  
+      if(i == 1 || i == y){
+          for(j = 0; j < x; j++){
+              printf("\xB2");
+          }
+      }else{
+          for(j = 1; j <= x; j++){
+              if(j == 1 || j == x){
+                  printf("\xB2");
+              }else{
+                  printf(" ");
+              }
+          }
+      }
+  }
+}
+
+void secBox(char a[]){
+
+    int i, j;
+
+    for(i = 1; i <= 21; i++){
+        if(i == 1){
+            for(j = 0; j < 81; j++){
+                if(j <= 30 || j >= 49){
+                    printf("\xB2");
+                }else{
+                    printf("%c", a[j - 30]);
+                }
+            }
+        }else if(i == 21){
+             for(j = 0; j < 81; j++){
+                printf("\xB2");
+            }
+        }else{
+            for(j = 1; j <= 81; j++){
+                if(j == 1 || j == 81){
+                    printf("\xB2");
+                }else{
+                    printf(" ");
+                }
+            }
+        }
+        printf("\n");
+    }
+}
+
+void loadingPage(){
+    int a, i;
+    clear_screen();
+    gotoxy(22,7);
+    puts("*********** NOW LOADING ***********");
+    gotoxy(15, 9);
+    box(50, 3, 15, 9);
+    gotoxy(16,10);
+
+    a= 16;
+    for(i = 1; i < 50; i++){
+        printf("\xB1");
+        delay(1000);
+        gotoxy(a++, 10);
+    }
+}
+
+
+
+void delay(unsigned int x){
+
+    int i, j;
+    x *= 10000;
+    for(i = 0; i <= x; i++){
+        j = i;
+    }
 }
