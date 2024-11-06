@@ -117,6 +117,8 @@ void afficher_menu() {
     int x = 30;
     int y = 2;  
     client c;
+    int idclient;
+    double montant;
     FILE* fich;
     date d;
     system("cls");
@@ -135,13 +137,16 @@ void afficher_menu() {
     printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 3-FAIRE UNE TRANSACTION .\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 4-SUPPRIMER LE COMPTE .\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 4-EFFECTUER UN RETRAIT  .\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 5-CREATION DE COMPTE .\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 5-EFFECTUER UN DÉPÔT .\n");
+
+     gotoxy(x, y++);
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 6-SUPPRIMER LE COMPTE .\n");
 
     gotoxy(x, y++);
-    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 6-QUITTER L'APPLICATION.\n");
+    printf("▓▓▓▓▓▓▓▓▓▓▓▓▓░ 7-QUITTER L'APPLICATION.\n");
 
     gotoxy(x, y++);
     printf("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n");
@@ -152,11 +157,11 @@ void afficher_menu() {
         {
         case 1:
             system("cls");
-            CREATIONDECOMPTE(fich,c);
+            CREATIONDECOMPTE(fich,idlcient);
             break;
         case 2:
             system("cls");
-            AFFICHAGEDECOMPTE(fich,c);
+            AFFICHAGEDECOMPTE(fich,idclient);
             break;
         case 3:
          
@@ -167,7 +172,10 @@ void afficher_menu() {
         case 5:
             
             break;
-        case 6:
+         case 6:
+          
+            break;
+        case 7:
             quitter();
             break;
         default:
@@ -271,7 +279,7 @@ int CREATIONDECOMPTE(FILE* fich, client c1) {
 
     return 0;
 }
-int AFFICHAGEDECOMPTE(FILE* fich, client c1){
+int AFFICHAGEDECOMPTE(FILE* fich, int clientid){
      int choix=0;
     int x = 30;
     int y = 2;  
